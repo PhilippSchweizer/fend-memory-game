@@ -5,22 +5,9 @@
 let card = document.getElementsByClassName('card');
 let cards = [...card];
 
-/*
- * Make cards clickable by looping through the array holding the cards and adding an event listener to each one
- */
+let openCards = function() {
 
-for (var i = 0; i < cards.length; i++) {
-  cards[i].addEventListener('click', displayCard);
-};
-
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -38,6 +25,25 @@ function shuffle(array) {
   return array;
 }
 
+// Use css classes to 'turn' a card when clicked
+
+var displayCard = function() {
+  this.classList.toggle('open');
+  this.classList.toggle('show');
+  // this.classList.toggle('disabled');
+}
+
+
+
+
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -49,3 +55,9 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+document.querySelector('ul').addEventListener('click', displayCard, openCards);
+
+(event) {
+  if (event.target.nodeName === 'LI')
+})
