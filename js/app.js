@@ -1,29 +1,30 @@
 /*
- * Create a list that holds all of your cards
+ * Variables
  */
 
-let card = document.getElementsByClassName('card');
-let cards = [...card];
+let openCards = [];
+let matchedCards = [];
 
-let openCards = function() {
 
-}
+const iconsList = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb"],
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue, randomIndex;
 
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+
+  // Shuffle function from http://stackoverflow.com/a/2450976
+  function shuffle(array) {
+    var currentIndex = array.length,
+      temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
-
-  return array;
-}
 
 // Use css classes to 'turn' a card when clicked
 
@@ -56,8 +57,6 @@ var displayCard = function() {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-document.querySelector('ul').addEventListener('click', displayCard, openCards);
+function cardClick() {
 
-(event) {
-  if (event.target.nodeName === 'LI')
-})
+}
