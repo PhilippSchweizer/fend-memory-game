@@ -42,7 +42,11 @@ function init() {
   cardsList.appendChild(cardsFragment);
 }
 
-
+// Start game
+function start() {
+  init();
+  cardClick();
+}
 
 
 function cardClick() {
