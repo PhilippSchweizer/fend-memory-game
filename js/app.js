@@ -121,15 +121,12 @@ function isMatched(currentCard, previousCard) {
 }
 
 // Add move to move counter
-
 function addMove() {
   moves++;
   movesContainer.innerHTML = moves;
 }
 
-/*
- * Game Over?
- */
+// Check if game is over
 function isOver() {
   if (iconsList.length === matchedCards.length) {
     gameOverMessage();
