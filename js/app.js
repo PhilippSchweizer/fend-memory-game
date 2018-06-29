@@ -8,8 +8,8 @@ let openCards = [],
 
 
 
-const iconsList = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb"],
-  movesContainer = document.querySelector(".moves");
+const iconsList = ['fa fa-diamond', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-bolt', 'fa fa-cube', 'fa fa-cube', 'fa fa-leaf', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-bomb'],
+  movesContainer = document.querySelector('.moves');
 
 
 
@@ -29,20 +29,12 @@ function shuffle(array) {
   return array;
 }
 
-// Use css classes to 'turn' a card when clicked
-
-var displayCard = function() {
-  this.classList.toggle('open');
-  this.classList.toggle('show');
-  // this.classList.toggle('disabled');
-}
-
 
 
 
 /*
  * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - shuffle the list of cards using the provided 'shuffle' method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
@@ -55,7 +47,7 @@ function cardClick() {
   for (let i = 0; i < cards.length; i++) {
 
     // Add a click event to each card
-    cards[i].addEventListener("click", function() {
+    cards[i].addEventListener('click', function() {
 
       // Cache the current and previous clicked cards
       const currentCard = this;
@@ -71,7 +63,7 @@ function cardClick() {
       if (openCards.length === 1) {
 
         // step 1: lock clicked card into open status
-        currentCard.className = "open show disabled";
+        currentCard.className = 'open show disabled';
 
         // step 2: Add this card to the openCards array
         openCards.push(currentCard);
@@ -88,7 +80,7 @@ function cardClick() {
         // step 6: Adjust rating
         rating();
       } else {
-        currentCard.className = "show disabled";
+        currentCard.className = 'show disabled';
         currentOpenedCards.push(currentCard);
       }
     });
@@ -101,9 +93,9 @@ function isMatched(currentCard, previousCard) {
   // Matched?
   if (currentCard.innerHTML === previousCard.innerHTML) {
 
-    // "Lock" cards
-    currentCard.className = "show match disabled";
-    previousCard.className = "show match disabled";
+    // 'Lock' cards
+    currentCard.className = 'show match disabled';
+    previousCard.className = 'show match disabled';
 
     // Add Current & Previous card to `matchedCards` array
     matchedCards.push(currentCard, previousCard);
@@ -116,8 +108,8 @@ function isMatched(currentCard, previousCard) {
     //* Put cards back to closed state. Stop timer for 500 milliseconds while doing so.
     setTimeout(function() {
       // Use `className` to replace existing classes with the given ones
-      currentCard.className = "open card";
-      previousCard.className = "open card";
+      currentCard.className = 'open card';
+      previousCard.className = 'open card';
     }, 500)
   }
 }
