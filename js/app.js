@@ -4,12 +4,15 @@
 
 let openCards = [],
   matchedCards = [],
-  firstClick = true;
+  firstClick = true,
+  rateHTML = '';
 
 
 
 const iconsList = ['fa fa-diamond', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-bolt', 'fa fa-cube', 'fa fa-cube', 'fa fa-leaf', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-bomb'],
-  movesContainer = document.querySelector('.moves');
+  movesContainer = document.querySelector('.moves'),
+  message = document.querySelector('.message'),
+  rateContainer = document.querySelector('#total_rate');
 
 
 
@@ -131,6 +134,27 @@ function isOver() {
   if (iconsList.length === matchedCards.length) {
     gameOverMessage();
   }
+}
+
+// Display message when game is over
+function message() {
+
+  stopTimer();
+
+  // Display the message
+  message.style.top = '0';
+
+  // Add moves to modal
+  const totalMoves = document.querySelector('#total_moves');
+  totalMoves.innerHTML = moves + 1; // + 1 is a workaround because somehow moves returns the count -1
+
+  // Add rating
+  rateContainer.innerHTML = rateHTML;
+
+  // Add time to message
+  const totalHours = document.querySelector('#totalHours');
+  const totalMinutes = document.querySelector('#totalMinutes');
+  const totalSeconds = document.querySelector('#totalSeconds');
 }
 
 /*
