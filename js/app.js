@@ -29,16 +29,18 @@ function shuffle(array) {
   return array;
 }
 
+// Initialize game
+function init() {
+  const icons = shuffle(iconsList);
+  const cardsFragment = document.createDocumentFragment();
 
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided 'shuffle' method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
+  for (let i = 0; i < icons.length; i++) {
+    const card = document.createElement('li');
+    card.innerHTML = '<i class="' + icons[i] + '"></i>';
+    cardsFragment.appendChild(card);
+  }
+  cardsList.appendChild(cardsFragment);
+}
 
 
 
