@@ -103,7 +103,7 @@ function isMatched(currentCard, previousCard) {
     currentCard.className = 'show match disabled';
     previousCard.className = 'show match disabled';
 
-    // Add Current & Previous card to `matchedCards` array
+    // Add Current & Previous card to matchedCards array
     matchedCards.push(currentCard, previousCard);
 
     // Game Over?
@@ -111,7 +111,7 @@ function isMatched(currentCard, previousCard) {
 
   } else {
 
-    //* Put cards back to closed state. Stop timer for 500 milliseconds while doing so.
+    // Put cards back to closed state and stop timer while doing so
     setTimeout(function() {
       // Use `className` to replace existing classes with the given ones
       currentCard.className = 'open card';
