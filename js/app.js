@@ -159,8 +159,8 @@ function message() {
 
   // Add time to message
   // const totalHours = document.querySelector('#totalHours');
-  const totalMinutes = document.querySelector('#totalMinutes');
-  const totalSeconds = document.querySelector('#totalSeconds');
+  const totalMinutes = document.querySelector('#total_minutes');
+  const totalSeconds = document.querySelector('#total_seconds');
   // totalHours.innerHTML = hours;
   totalMinutes.innerHTML = minutes;
   totalSeconds.innerHTML = seconds;
