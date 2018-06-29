@@ -5,14 +5,20 @@
 let openCards = [],
   matchedCards = [],
   firstClick = true,
-  rateHTML = '';
+  rateHTML = '',
+  // hours,
+  minutes,
+  seconds,
+  totalTime = 0;
+
 
 
 
 const iconsList = ['fa fa-diamond', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-bolt', 'fa fa-cube', 'fa fa-cube', 'fa fa-leaf', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-bomb'],
   movesContainer = document.querySelector('.moves'),
   message = document.querySelector('.message'),
-  rateContainer = document.querySelector('#total_rate');
+  rateContainer = document.querySelector('#total_rate'),
+  repeatBtn = document.querySelector('.restart');
 
 
 
@@ -152,10 +158,16 @@ function message() {
   rateContainer.innerHTML = rateHTML;
 
   // Add time to message
-  const totalHours = document.querySelector('#totalHours');
+  // const totalHours = document.querySelector('#totalHours');
   const totalMinutes = document.querySelector('#totalMinutes');
   const totalSeconds = document.querySelector('#totalSeconds');
+  // totalHours.innerHTML = hours;
+  totalMinutes.innerHTML = minutes;
+  totalSeconds.innerHTML = seconds;
 }
+
+// Plai again
+
 
 /*
  * Timer [ Start ]
@@ -165,12 +177,12 @@ function startTimer() {
   incrementer = setInterval(function() {
     // Add totalTime by 1
     totalTime += 1;
-    // Convert Total Time to H:M:S
+    // Convert Total Time to M:S
     calculateTime(totalTime);
     // Change the current time values
     secondsContainer.innerHTML = seconds;
     minutesContainer.innerHTML = minutes;
-    hoursContainer.innerHTML = hours;
+    // hoursContainer.innerHTML = hours;
   }, 1000);
 }
 
@@ -178,7 +190,7 @@ function startTimer() {
  * Timer [ Calculate Time ]
  */
 function calculateTime(totalTime) {
-  hours = Math.floor(totalTime / 60 / 60);
+  // hours = Math.floor(totalTime / 60 / 60);
   minutes = Math.floor((totalTime / 60) % 60);
   seconds = totalTime % 60;
 }
