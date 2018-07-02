@@ -1,38 +1,48 @@
-/*
- * Variables
- */
-
+// Variables
 let openCards = [],
   matchedCards = [],
   firstClick = true,
   rateHTML = '',
-  // hours,
   minutes,
   seconds,
-  totalTime = 0;
-
-
+  totalTime = 0,
+  moves = 0,
+  rateStep = 6;
 
 
 const iconsList = ['fa fa-diamond', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-bolt', 'fa fa-cube', 'fa fa-cube', 'fa fa-leaf', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-bomb'],
   movesContainer = document.querySelector('.moves'),
   message = document.querySelector('.message'),
   rateContainer = document.querySelector('#total_rate'),
-  repeatBtn = document.querySelector('.restart');
+  restartBtn = document.querySelector('.panel .play-again'),
+  restartBtnInMessage = document.querySelector('.message .play-again'),
+  deck = document.querySelector('.deck'),
+  cards = deck.children,
+  stars = document.querySelectorAll('.star'),
+  secondsContainer = document.querySelector('#seconds'),
+  minutesContainer = document.querySelector('#minutes'),
+  exactMoves = iconsList.length / 2,
+  maxStars = exactMoves + rateStep,
+  minStars = exactMoves + (2 * rateStep);
 
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue, randomIndex;
+  let counter = array.length;
 
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+  // While there are elements in the array
+  while (counter > 0) {
+    // Pick a random index
+    let index = Math.floor(Math.random() * counter);
+
+    // Decrease counter by 1
+    counter--;
+
+    // And swap the last element with it
+    let temp = array[counter];
+    array[counter] = array[index];
+    array[index] = temp;
   }
 
   return array;
@@ -41,14 +51,14 @@ function shuffle(array) {
 // Initialize game
 function init() {
   const icons = shuffle(iconsList);
-  const cardsFragment = document.createDocumentFragment();
+  const deckFragment = document.createDocumentFragment();
 
   for (let i = 0; i < icons.length; i++) {
     const card = document.createElement('li');
     card.innerHTML = '<i class="' + icons[i] + '"></i>';
-    cardsFragment.appendChild(card);
+    deckFragment.appendChild(card);
   }
-  cardsList.appendChild(cardsFragment);
+  deck.appendChild(deckFragment);
 }
 
 // Start game
@@ -96,7 +106,7 @@ function cardClick() {
         rating();
       } else {
         currentCard.className = 'show disabled';
-        currentOpenedCards.push(currentCard);
+        openCards.push(currentCard);
       }
     });
   }
@@ -122,7 +132,6 @@ function isMatched(currentCard, previousCard) {
 
     // Put cards back to closed state and stop timer while doing so
     setTimeout(function() {
-      // Use `className` to replace existing classes with the given ones
       currentCard.className = 'open card';
       previousCard.className = 'open card';
     }, 500)
@@ -143,14 +152,14 @@ function isOver() {
 }
 
 // Display message when game is over
-function message() {
+function gameOverMessage() {
 
   stopTimer();
 
   // Display the message
   message.style.top = '0';
 
-  // Add moves to modal
+  // Add moves to message
   const totalMoves = document.querySelector('#total_moves');
   totalMoves.innerHTML = moves + 1; // + 1 is a workaround because somehow moves returns the count -1
 
@@ -166,12 +175,31 @@ function message() {
   totalSeconds.innerHTML = seconds;
 }
 
-// Plai again
+// Play again buttons
+restartBtn.addEventListener('click', function() {
+  restart();
+});
+restartBtnInMessage.addEventListener('click', function() {
+  // Hide the message
+  message.style.top = "-150%";
+  restart();
+});
 
+// Rating
+function rating() {
 
-/*
- * Timer [ Start ]
- */
+  if (moves < maxStars) {
+    rateHTML = "<i class='star fa fa-star'></i><i class='star fa fa-star'></i><i class='star fa fa-star'></i>";
+  } else if (moves < minStars) {
+    stars[2].style.color = "#444";
+    rateHTML = "<i class='star fa fa-star'></i><i class='star fa fa-star'></i>";
+  } else {
+    stars[1].style.color = "#444";
+    rateHTML = "<i class='star fa fa-star'></i>";
+  }
+}
+
+// Timer [ Start ]
 function startTimer() {
   // Start Incrementer
   incrementer = setInterval(function() {
@@ -186,19 +214,50 @@ function startTimer() {
   }, 1000);
 }
 
-/*
- * Timer [ Calculate Time ]
- */
+// Timer [ Calculate Time ]
 function calculateTime(totalTime) {
   // hours = Math.floor(totalTime / 60 / 60);
   minutes = Math.floor((totalTime / 60) % 60);
   seconds = totalTime % 60;
 }
 
-/*
- * Timer [ Stop ]
- */
+// Timer [ Stop ]
 function stopTimer() {
   // Stop Timer
   clearInterval(incrementer);
 }
+
+// Reset deck
+function resetValues() {
+  matchedCards = [];
+  openCards = [];
+  moves = 0;
+  movesContainer.innerHTML = '--';
+  stars[1].style.color = "#ffb400";
+  stars[2].style.color = "#ffb400";
+  rateHTML = '';
+  minutesContainer.innerHTML = '00';
+  secondsContainer.innerHTML = '00';
+  stopTimer();
+  firstClick = true;
+  totalTime = 0;
+  minutes = 0;
+  seconds = 0;
+}
+
+// Restart function
+function restart() {
+
+  // Remove all cards
+  deck.innerHTML = '';
+
+  // Reset Current Values
+  resetValues();
+
+  // Start the game again
+  start();
+}
+
+
+// Start the game for the first time!
+start();
