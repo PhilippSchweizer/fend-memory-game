@@ -26,9 +26,37 @@ body {
   flex-direction: column;
 }
 
+.panel {
+  font-size: 1.7rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.move-count, .timer, .rating, .restart {
+  width: 25%;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.star {
+  color: #ffb400;
+}
+
+.panel .play-again {
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.panel .play-again:hover {
+  transform: rotate(90deg);
+}
+
 h1 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+  font-size: 3rem;
+  margin: 1rem 0;
 }
 
 /*
@@ -36,78 +64,61 @@ h1 {
  */
 
 .deck {
-  width: 660px;
-  min-height: 680px;
-  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-  padding: 32px;
-  border-radius: 10px;
-  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 0 3em;
+  list-style: none;
+  padding-left: 0;
+  margin: 0 auto;
 }
 
-.deck .card {
-  height: 125px;
-  width: 125px;
-  background: #2e3d49;
-  font-size: 0;
-  color: #ffffff;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+.deck li {
+  display: inline-block;
+  margin: 1%;
+  margin-bottom: 1vw;
+  width: 23%;
+  height: 80px;
+  line-height: 90px;
+  text-align: center;
+  background: #333;
+  color: #eee;
 }
 
-.deck .card.open {
-  transform: rotateY(0);
-  background: #02b3e4;
-  cursor: default;
-}
-
-.deck .card.show {
-  font-size: 33px;
-}
-
-.deck .card.match {
-  cursor: default;
-  background: #02ccba;
-  font-size: 33px;
-}
-
-.deck .card.disabled {
+.deck li.disabled {
   pointer-events: none;
+}
+
+.deck li.show i {
+  opacity: 1;
+}
+
+.deck li.matched {
+  background: green;
+}
+
+.deck li i {
+  font-size: 25px;
+  opacity: 0;
+  transition: all 300ms ease;
 }
 
 /*
  * Styles for the Score Panel
  */
 
-.score-panel {
+.panel {
   text-align: left;
-  width: 345px;
+  width: 700px;
   margin-bottom: 10px;
 }
 
-.score-panel .stars {
+/* .rating {
   margin: 0;
   padding: 0;
   display: inline-block;
   margin: 0 5px 0 0;
-}
+} */
 
-.score-panel .stars li {
+.rating li {
   list-style: none;
   display: inline-block;
-}
-
-.score-panel .restart {
-  float: right;
-  cursor: pointer;
 }
 
 .message {
@@ -153,4 +164,45 @@ h1 {
 
 .message .inner button:hover {
   box-shadow: none;
+}
+
+/* Responsive */
+
+@media all and (min-width: 600px) {
+  .deck {
+    width: 500px;
+  }
+  .deck li {
+    height: 100px;
+    line-height: 120px;
+  }
+  .deck li i {
+    font-size: 30px;
+  }
+}
+
+@media all and (min-width: 750px) {
+  .game-container h1 {
+    font-size: 3.5rem;
+  }
+  .game-container .features {
+    font-size: 2rem;
+  }
+  .deck {
+    width: 650px;
+  }
+  .deck li {
+    height: 140px;
+    line-height: 160px;
+  }
+  .deck li i {
+    font-size: 40px;
+  }
+}
+
+@media all and (min-width: 1000px) {
+  .deck li {
+    height: 140px;
+    line-height: 160px;
+  }
 }
